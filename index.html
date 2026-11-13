@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人履歷</title>
+
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #EFEFE6;
+            color: #2C4A34;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none; /* 去掉底線 */
+            color: inherit;
+        }
+
+        .container { /* 網頁大區塊 */
+            max-width: 1000px;
+            margin: auto;
+        }
+
+
+        /* 導覽列 */
+        
+        nav {
+            background-color: #EFEFE6;
+            border-bottom: 5px solid #D8E0D8;
+            padding: 15px 30px;
+            position: sticky; /* 向下滾動時 不會隨著網頁消失 */
+            top: 0; /* 碰到網頁頂端就固定 */
+        }
+
+        nav .container {
+            display: flex; /* 區塊橫向排列 */
+
+            justify-content: space-between; 
+            /* flexbox排版屬性 使區塊可以平均分配在元素之間 
+            但是不會塞滿空間 不會因為分配空間而改變自身寬度*/
+
+            align-items: center; /* 區塊左右排列時 當大小不同 會置中排列 */
+        }
+
+        nav h1 {
+            font-size: 16px;
+        }
+
+        nav .menu {
+            display: flex;
+            gap: 25px; /* 元素之間保持相同距離 不用像margin一樣逐一設定 */
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #16834D;
+        }
+
+        /* HEADER */
+        
+        header {
+            padding: 40px 25px;
+        }
+
+        .profile {
+            background-color: white;
+            border-radius: 15px;
+            padding: 35px;
+
+            display: flex;
+            align-items: center;
+            gap: 35px;
+
+            box-shadow: 0 2px 8px #00000010;
+        }
+
+        .photo {
+            width: 145px;
+            height: 145px;
+            border-radius: 50%;
+            background-color: #E2EBE2;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 50px;
+            color: #6E8575;
+
+        }
+        .photo img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .profile-info {
+            flex: 1; /* flexbox排版屬性 使區塊可以平均分配在元素之間 但是會塞滿空間 */
+        }
+
+        .profile-info h2 {
+            font-size: 30px;
+        }
+
+        .profile-info p {
+            font-size: 14px;
+            color: #6E8575;
+        }
+
+        .slogan {
+            background-color: #F6F8F6;
+            border: 1px solid #D5E2D5;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        .slogan p {
+            color: #2C4A34;
+            font-weight:bold;
+        }
+
+        /* SECTION 技能 */
+        section {
+            padding: 45px 25px;
+        }
+
+        .skills {
+            background-color: #E2EBE2;
+        }
+
+        .section-title {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .line {
+            width: 280px;
+            height: 2px;
+            background-color: #6E8575;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: #6E8575;
+            margin-bottom: 25px;
+        }
+
+        /* 技能卡片 */
+        .skill-list {
+            display: grid; /* 使區塊能夠排列成列和欄 */
+            grid-template-columns: repeat(3, 1fr); /* 設定幾個欄位 */
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .skill-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 8px #00000010;
+        }
+
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #E2EBE2;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .skill-card h3 {
+            font-size: 16px;
+        }
+
+        .skill-card p {
+            font-size: 12px;
+            color: #6E8575;
+        
+        }
+        .skill-card > p:first-of-type {
+            min-height: 40px;
+        }
+
+        .small-line {
+            width: 65px;
+            height: 2px;
+            background-color: #6E8575;
+            margin: 10px 0;
+        }
+
+        /* 技能進度條 */
+        .progress {
+            background-color: #EEEEEE;
+            height: 8px;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        /* 進度條動畫 */
+        .progress-fill {
+            background-color: #35533F;
+            height: 100%;
+            border-radius: 10px;
+            width: var(--progress-width);
+            animation: progress-animation 1.5s ease-out;
+        }
+
+        /* 動畫設定 */
+        @keyframes progress-animation {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: var(--progress-width);
+            }
+        }
+        
+
+        .skill-bottom {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        /* ===== SECTION 經歷 ===== */
+        .experience {
+            background-color: #EFEFE6;
+        }
+
+        .experience-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .experience-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            min-height: 190px;
+            box-shadow: 0 2px 8px #00000010;
+            
+        }
+
+        .experience-text {
+            flex: 1;
+        }
+
+
+        .experience-card h3 {
+            font-size: 16px;
+        }
+
+        .experience-card p {
+            font-size: 12px;
+            color: #6E8575;
+        }
+
+        .experience-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 10px 0;
+            display: block;
+        }
+
+        /* ARTICLE 聯絡方式 */
+        article {
+            background-color: #35533F;
+            color: white;
+            padding: 45px 25px;
+        }
+
+        .contact-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .contact-card {
+            background-color: white;
+            color: #2C4A34;
+            border-radius: 15px;
+            padding: 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .contact-card p {
+            color: #6E8575;
+            font-size: 12px;
+        }
+
+        .social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social a {
+            width: 45px;
+            height: 45px;
+            background-color: #E2EBE2;
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 20px;
+        }
+
+        .social a:hover {
+            background-color: #B9D9BE;
+        }
+
+        /* FOOTER 頁尾 */
+        footer {
+            background-color: #35533F;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid #23402E;
+        }
+
+        footer a {
+            display: inline-block;
+            padding: 8px 30px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #B9D9BE;
+        }
+
+        /* 手機版排版 */
+        @media (max-width: 768px) {
+
+            nav .container {
+                flex-direction: column; /* 區塊垂直排列 */
+                gap: 15px;
+            }
+
+            nav .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .profile {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .skill-list,
+            .experience-list {
+                grid-template-columns: 1fr;
+            }
+
+            .skill-bottom,
+            .contact-list {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-card {
+                flex-direction: column;
+            }
+
+            .experience-img {
+                width: 100%;
+                height: 200px;
+            }
+            
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV 導覽列 -->
+    <nav>
+        <div class="container">
+            <div class="menu">
+                <a href="#header-intro">個人介紹</a>
+                <a href="#section-skills">技能</a>
+                <a href="#section-experience">經歷</a>
+                <a href="#section-contact">聯絡方式</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER 個人介紹 -->
+    <header id="header-intro">
+        <div class="container">
+
+            <div class="profile">
+
+                <!-- 大頭照 -->
+                <div class="photo">
+                    <img src="image/profile.jpg" alt="">
+                    
+                </div>
+
+                <!-- 個人資料 -->
+                <div class="profile-info">
+
+                    <h2>譚仲恩</h2>
+                    <p>中原大學 ／ 資訊管理學系</p>
+
+                    <div class="slogan">
+                        <strong>個人 Slogan / 座右銘</strong>
+                        <p>「努力可能沒結果，不努力永遠沒結果。」</p>
+                    </div>
+
+                    <p>我對資訊科技與程式設計具有高度興趣。
+                        具備 Java、Python 等程式語言基礎，
+                        並持續學習 HTML、CSS 等網頁開發技術。
+                        具備自主學習、邏輯思考與問題解決能力，
+                        希望透過課程與實作累積經驗，持續提升專業技能，
+                        朝工程師相關產業發展。</p>
+                    <p>個人特色：具備良好的溝通能力、快速學習新技術與問題解決導向思維。</p>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1 技能 -->
+    <section class="skills" id="section-skills">
+        <div class="container">
+
+            <h2 class="section-title">技能</h2>
+            <div class="line"></div>
+
+            <!-- 第一排三張卡片 -->
+            <div class="skill-list">
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-brands fa-java"></i>  
+                    </div>
+
+                    <h3>Java 系統開發</h3>
+                    <div class="small-line"></div>
+                    <p>熟悉基礎語法、物件導向設計 (OOP)、Spring Boot 後端架構與 API 開發。</p>
+
+                    <div class="progress">
+                        <div class="progress-fill" style="--progress-width:75%"></div>
+                    </div>
+                    <p>熟練度 75%</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-brands fa-html5"></i>
+                    </div>
+
+                    <h3>前端網頁開發</h3>
+                    <div class="small-line"></div>
+                    <p>熟練 HTML5, CSS3, JavaScript及網頁排版。</p>
+
+                    <div class="progress">
+                        <div class="progress-fill" style="--progress-width:80%"></div>
+                    </div>
+                    <p>熟練度 80%</p>
+                    
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-brands fa-python"></i>
+                    </div>
+
+                    <h3>Python 程式設計</h3>
+                    <div class="small-line"></div>
+                    <p>熟練基礎語法、資料分析、自動化處理。</p>
+
+                    <div class="progress">
+                        <div class="progress-fill" style="--progress-width:85%"></div>
+                    </div>
+                    <p>熟練度 85%</p>
+                </div>
+
+            </div>
+
+            <!-- 第二排兩張卡片 -->
+            <div class="skill-bottom">
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <h3>
+                        <a href="eng.html" target="_blank">英文能力↗</a>
+                    </h3>
+                    <div class="small-line"></div>
+                    <p>熟練英文語法及對話。
+                        <br>114年考取多益成績:870分；115年多益成績:890分。</br>
+                        <p>高中英聽檢定A級。</p>
+                    </p>
+
+                    <div class="progress">
+                        <div class="progress-fill" style="--progress-width:90%"></div>
+                    </div>
+                    <p>熟練度 90%</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-solid fa-code-branch"></i>
+                    </div>
+
+                    <h3>Git 版本控制與協作</h3>
+                    <div class="small-line"></div>
+                    <p>熟悉 Git / GitHub 團隊分支開發流程與 CI/CD 基本概念。</p>
+
+                    <div class="progress">
+                        <div class="progress-fill" style="--progress-width:75%"></div>
+                    </div>
+                    <p>熟練度 75%</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 2 經歷 -->
+    <section class="experience" id="section-experience">
+        <div class="container">
+
+            <h2 class="section-title">經歷</h2>
+            <div class="line"></div>
+
+            <div class="experience-list">
+
+                <div class="experience-card">    
+                        <a href="exp1.html" target="_blank">
+                            <h3>探究與實作—咖啡實驗↗</h3>
+                        </a>
+                        <div class="small-line"></div>
+                        <p>高二老師指引我們為咖啡做各式各樣的實驗，讓我們找出何種因素導致咖啡粉除濕效果，
+                            但不給我們固定的主題，而是讓我們自己尋找變因。
+                            最終我們組選擇了烘焙程度以及時間作為操縱變因，更讓我們提升了自主能力。
+                            老師最後安排了一場大報告讓我們高二全員參加，甚至邀請了台大教授一同聽講。
+                            <p>&nbsp;&nbsp;&nbsp;</p>
+
+                            <p>
+                                大報告中，面對全部高二生以及教授們的緊張感，不但很好地磨練了我的演講能力和臨場反應
+                                ，也令我對往後遇到此種場面感到能不再緊張，更能得心應手。
+                                這次活動使我對團隊精神更有體悟，三個人做出如此的報告
+                                我真心對我還有我的組員感到驕傲。
+                            </p>
+                        </p>
+                    </div>
+
+                <div class="experience-card">
+                        <a href="exp2.html" target="_blank">
+                            <h3>籃球社↗</h3>
+                        </a>
+                        <div class="small-line"></div>
+                        <p>一開始對籃球並不擅長的我，進入了籃球社，
+                            經過了幾個星期與同學的交流磨練，開始對這項運動開始有了興趣，
+                            技術也得到了提升。後來我逐漸發現我的反應較以前好，跑跳能力也是
+                            ，才知道運動對一個人的改變能有多大。
+                        <p>&nbsp;&nbsp;&nbsp;</p>
+
+                        <p>
+                            籃球為我帶來了運動能力上顯著的進步，
+                            但最重要的還是我學到了競爭以及運動家精神。
+                            籃球中的激烈碰撞以及充滿強度的對抗，使人充滿了好勝心，
+                            這使我之後對任何事情都有著認真對待的心態。
+                        </p></p>
+                    </div>
+                
+                <div class="experience-card">
+                    <a href="exp3.html" target="_blank">
+                        <h3>化學課程成果↗</h3>
+                    </a>
+                    <div class="small-line"></div>
+                    <p>因為我高中是三類，在學校
+                        做了關於電解電鍍與無電電鍍的實驗，
+                        而電鍍時要注意不能讓金屬片相碰，不然電鍍無法成功，所以
+                        我跟了幾個同學一起操作，互相幫助達到實驗目的。
+                        <p>
+                            無電電鍍時則更偏化學，需要用到諸多溶液，
+                            例如硝酸銀、氫氧化鈉、濃氨水水溶液等，加入硝酸銀與氫氧化鈉後必須等到澄清
+                            才能再加入濃氨水和葡萄糖水溶液，我有一次就因為沒有等到澄清而沒有使其成功，
+                            最後跟老師討論後老師才告訴我這個原因。
+                        </p>
+                        <p>&nbsp;&nbsp;&nbsp;</p>
+                        <p>
+                            
+                            現在回想起真的很懷念高中時光，就算
+                            都忙著處理課業以及學測，對於那時的讀書氛圍我甚是想念。
+                        </p>
+                    </p> 
+                    </div>
+
+                
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ASIDE 聯絡方式 -->
+    <article id="section-contact">
+        <div class="container">
+
+
+            <h2 class="section-title">聯絡方式</h2>
+
+            <div class="contact-list">
+
+                <!-- 電話 -->
+                <div class="contact-card">
+                    <div>
+                        <h3>聯絡電話及時間</h3>
+                        <a href="tel:0966496543">
+                            <p>0966496543↗</p>
+                        </a>
+                        <p>17:00-23:00</p>
+                    </div>
+                </div>
+
+                <!-- 社群媒體 -->
+                <div class="contact-card">
+
+                    <div>
+                        <h3>社群媒體</h3>
+                    </div>
+
+                    <div class="social">
+                        <a href="https://github.com/juipeng9487-eng" target="_blank">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/tzennnn_/" target="_blank">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a href="mailto:oozz123123zzoo@gmail.com" target="_blank">
+                            <i class="fa-regular fa-envelope"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </article>
+
+    <!-- FOOTER 頁尾 -->
+    <footer>
+        <div class="container">
+
+            <a href="#header-intro">↑↑ TOP ↑↑</a>
+
+        </div>
+    </footer>
+
+</body>
+</html>

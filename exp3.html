@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電鍍實驗</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #EFEFE6;
+            color: #2C4A34;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding: 40px;
+            
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: aquamarine;
+            width:fit-content;
+            margin:0px auto;
+            padding:0px 10px;
+            border-radius: 15px;
+
+        }
+
+        .exp {
+            max-width: 1600px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(2, 400px);
+            place-content: center;
+            gap: 30px;
+        }
+
+        /* 照片外面的卡片 */
+        .exp div {
+            background-color: #fff;
+            padding: 10px;
+            border: 2px solid #D5D9C8;
+            border-radius: 18px;
+            box-shadow: 0 6px 15px rgba(44, 74, 52, 0.12);
+        }
+
+        /* 照片本身的外框 */
+        .exp img {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            border: 3px solid #C3CBB5;
+            border-radius: 12px;
+            padding: 8px;
+            background-color: #F5F5F0;
+        }
+
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #35533F;
+        }
+
+
+        .exp h3 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 18px;
+            color: #35533F;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #E2E6D9;
+        }
+
+        a{
+            text-decoration: none;
+            background-color: burlywood;
+            width:fit-content;
+            margin:0px auto;
+            padding:0px 10px;
+            border-radius: 15px;;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .exp {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>電解電鍍與無電電鍍</h1>
+    
+    <div class="exp">
+
+        <div>
+            <h3>報告</h3>
+            <img src="image/project3.png" alt="報告">
+        </div>
+
+        <div>
+            <h3>報告</h3>
+            <img src="image/project3_2.png" alt="報告">
+        </div>
+
+        <div>
+            <h3>報告</h3>
+            <img src="image/project3_3.png" alt="報告">
+        </div>
+
+        <div>
+            <h3>報告</h3>
+            <img src="image/project3_4.png" alt="報告">
+        </div>
+
+        
+
+    </div>
+
+    <a href="index.html" class="back" >↖返回個人履歷</a>
+
+</body>
+</html>
